@@ -6,7 +6,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-if !exists('g:textobj_function_javascript_select')
+if !exists('*g:textobj_function_javascript_select')
   function! g:textobj_function_javascript_select(object_type)
     return s:select_{a:object_type}()
   endfunction
@@ -82,8 +82,7 @@ if !exists('g:textobj_function_javascript_select')
       call search('\v<function>\s*\k*\s*\(', 'ceW')
       normal! %
 
-      call search('.', 'W') " right
-      while search('\S', 'cW') != 0 && s:cursor_syn() == 'Comment'
+      while search('\S', 'W') != 0 && s:cursor_syn() == 'Comment'
       endwhile
       if s:cursor_char() == '{'
         normal! %
@@ -114,7 +113,9 @@ if !exists('g:textobj_function_javascript_select')
 
   function! s:left()
     if col('.') == 1
-      normal! k$
+      if line('.') != 1
+        normal! k$
+      endif
     else
       normal! h
     endif
