@@ -57,6 +57,7 @@ CHANGELOG			      *textobj-function-javascript-changelog*
 0.1.1	2009-05-01
 	- Improved the expression closures support.
 	- Add this document.
+	- "af" uses linewise if possible.
 
 0.1	2009-04-25
 	- Initial version.
