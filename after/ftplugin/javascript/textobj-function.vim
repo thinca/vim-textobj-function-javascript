@@ -33,7 +33,7 @@ if !exists('*g:textobj_function_javascript_select')
     if type(range) == type([])
       let type = 'v'
       call setpos('.', range[0])
-      if getline('.')[:col('.') - 2] =~ '^\s*$'
+      if col('.') == 1 || getline('.')[:col('.') - 2] =~ '^\s*$'
         call setpos('.', range[1])
         if getline('.')[col('.'):] =~ '^\s*$'
           let type = 'V'
@@ -62,7 +62,7 @@ if !exists('*g:textobj_function_javascript_select')
       let e = endpos
     else
       let linewise = 0
-      if getline('.')[:col('.') - 2] =~ '^\s*$'
+      if col('.') == 1 || getline('.')[:col('.') - 2] =~ '^\s*$'
         normal! k$
       let linewise = 1
       else
