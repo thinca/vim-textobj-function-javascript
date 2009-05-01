@@ -58,7 +58,7 @@ if !exists('*g:textobj_function_javascript_select')
       let e = getpos('.')
 
       call setpos('.', endpos)
-      normal! %
+      call s:jump_to_pair()
 
       if getline('.')[col('.'):] =~ '^\s*$'
         normal! j0
@@ -80,23 +80,28 @@ if !exists('*g:textobj_function_javascript_select')
       let b = getpos('.')
 
       call search('\v<function>\s*\k*\s*\(', 'ceW')
-      normal! %
+      call s:jump_to_pair()
 
-      while search('\S', 'W') != 0 && s:cursor_syn() == 'Comment'
+      while search('\S', 'W') != 0 && s:cursor_syn() ==# 'Comment'
       endwhile
       if s:cursor_char() == '{'
-        normal! %
+        call s:jump_to_pair()
       else
         " Expression closures: function() expr
         let s:head = getpos('.') " to inner
-        let c = ''
-        while c !~ '[,;)}]'
-          call search('[[({,;)}]', 'W')
-          let c = s:cursor_char()
-          if c =~ '[[({]' && s:cursor_syn() !~ '\%(Constant\|Comment\)'
-            normal! %
+
+        while search('[])}[({,;]', 'W')
+          if s:cursor_syn() =~# '\%(Constant\|Comment\)'
+            continue
+          endif
+          let char = s:cursor_char()
+          if char =~ '[])},;]'
+            break
+          elseif char =~ '[[({]'
+            call s:jump_to_pair()
           endif
         endwhile
+
         call search('\S', 'bW')
       endif
       let e = getpos('.')
@@ -109,6 +114,10 @@ if !exists('*g:textobj_function_javascript_select')
       return ['v', b, e]
     endwhile
     return 0
+  endfunction
+
+  function! s:jump_to_pair()
+    normal %
   endfunction
 
   function! s:left()
