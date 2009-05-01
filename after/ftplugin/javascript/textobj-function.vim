@@ -30,15 +30,18 @@ if !exists('*g:textobj_function_javascript_select')
       let c -= 1
     endwhile
 
-    let type = 'v'
-    call setpos('.', range[0])
-    if getline('.')[:col('.') - 2] =~ '^\s*$'
-      call setpos('.', range[1])
-      if getline('.')[col('.'):] =~ '^\s*$'
-        let type = 'V'
+    if type(range) == type([])
+      let type = 'v'
+      call setpos('.', range[0])
+      if getline('.')[:col('.') - 2] =~ '^\s*$'
+        call setpos('.', range[1])
+        if getline('.')[col('.'):] =~ '^\s*$'
+          let type = 'V'
+        endif
       endif
+      let range = [type] + range
     endif
-    return [type] + range
+    return range
   endfunction
 
 
