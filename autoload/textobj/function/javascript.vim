@@ -1,5 +1,5 @@
 " Text objects for functions in javascript.
-" Version: 0.1.1
+" Version: 0.2
 " Author : thinca <thinca+vim@gmail.com>
 " License: zlib License
 

@@ -1,5 +1,5 @@
 " Vim additional ftplugin: javascript/textobj-function
-" Version: 0.1.1
+" Version: 0.2
 " Author : thinca <thinca+vim@gmail.com>
 " License: zlib License
 

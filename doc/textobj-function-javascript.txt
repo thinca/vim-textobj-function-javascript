@@ -1,6 +1,6 @@
 *textobj-function-javascript.txt*   Text objects for functions in javascript.
 
-Version: 0.1.1
+Version: 0.2
 Author : thinca <thinca+vim@gmail.com>
 License: zlib License
 
@@ -52,6 +52,12 @@ BUGS					   *textobj-function-javascript-bugs*
 
 ==============================================================================
 CHANGELOG			      *textobj-function-javascript-changelog*
+
+0.2	2014-04-29
+	- Use autoload function.
+	  - The previous version doesn't work on Vim 7.4.260 or later.
+	- Change the license.
+	  - Creative Commons Attribution 2.1 Japan License => zlib License
 
 0.1.1	2009-05-01
 	- Improved the expression closures support.
