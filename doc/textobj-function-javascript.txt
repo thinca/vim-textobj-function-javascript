@@ -1,9 +1,8 @@
 *textobj-function-javascript.txt*   Text objects for functions in javascript.
 
 Version: 0.1.1
-Author : thinca <http://d.hatena.ne.jp/thinca/>
-License: Creative Commons Attribution 2.1 Japan License
-         <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
+Author : thinca <thinca+vim@gmail.com>
+License: zlib License
 
 ==============================================================================
 CONTENTS			       *textobj-function-javascript-contents*
