@@ -87,11 +87,18 @@ endfunction
 
 function! s:function_range()
   let start = getpos('.')
-  while search('\<function\>', 'bcW') != 0
+  " look backward for function definition or fat arrow
+  while search('\<function\>\|\(([^\)]*)\|\k\+\)\s*=>\s*', 'bcW') != 0
     let b = getpos('.')
 
-    call search('\v<function>\s*\k*\s*\(', 'ceW')
-    call s:jump_to_pair()
+    " go to fat arrow if it exists
+    if (search('=>\s*', 'cnW'))
+      call search('=>\s*', 'ceW')
+    " otherwise go to the start of the function argument list
+    elseif (search('\v<function>\s*\k*\s*\(', 'cnW'))
+      call search('\v<function>\s*\k*\s*\(', 'ceW')
+      call s:jump_to_pair()
+    endif
 
     while search('\S', 'W') != 0 && s:cursor_syn() ==# 'Comment'
     endwhile
