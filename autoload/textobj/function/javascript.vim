@@ -88,11 +88,11 @@ endfunction
 function! s:function_range()
   let start = getpos('.')
   " look backward for function definition or fat arrow
-  while search('\v<function>|(\(%(\k|,|\s)*\)|\k+)\s*\=\>\s*', 'bcW') != 0
+  while search('\v(<async>\s+)?(<function>|(\(%(\k|,|\s)*\)|\k+)\s*\=\>\s*)', 'bcW') != 0
     let b = getpos('.')
 
     " go to either the start of the function argument list or right after the fat arrow
-    if (search('\v<function>\s*\k*\s*\(|\=\>\s*', 'ceW'))
+    if (search('\v(<async>\s+)?(<function>\s*\k*\s*\(|\=\>\s*)', 'ceW'))
       " if we're on the start of a normal function argument list - skip it
       if s:cursor_char() == '('
         call s:jump_to_pair()
